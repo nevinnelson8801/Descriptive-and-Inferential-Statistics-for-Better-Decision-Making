@@ -1,21 +1,4 @@
-"""
-Descriptive and Inferential Statistics for Better Decision-Making
-=================================================================
-Student : Nevin Nelson (Q1071615)
-Programme: BSc Computer Science and Digitisation (2024-2027)
-Dataset  : Swiss_data_set.csv (47 Swiss/French municipalities)
 
-Chapters covered:
-    1. Dataset Description
-    2. Data Cleaning (IQR outlier removal)
-    3. Visualization of variable distributions
-    4. Min-Max Normalization
-    5. Relationship of socioeconomic indicators with Fertility Rate
-"""
-
-# =============================================================================
-# IMPORTS
-# =============================================================================
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -23,16 +6,11 @@ import matplotlib.ticker as mticker
 import seaborn as sns
 from scipy import stats
 
-# =============================================================================
-# CONFIGURATION
-# =============================================================================
+
 DATA_PATH = "Swiss_data_set.csv"
 NUMERIC_COLS = ["Fertility", "Agriculture", "Examination", "Education",
                 "Catholic", "Infant.Mortality"]
 
-# =============================================================================
-# CHAPTER 1: LOAD & DESCRIBE THE DATASET
-# =============================================================================
 
 def load_data(path: str) -> pd.DataFrame:
     """Load the Swiss dataset and return a DataFrame."""
@@ -67,9 +45,6 @@ def describe_dataset(df: pd.DataFrame) -> None:
     print("\n[Fig. 1 saved as fig1_all_variables.png]")
 
 
-# =============================================================================
-# CHAPTER 2: DATA CLEANING
-# =============================================================================
 
 def compute_key_statistics(df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -165,9 +140,7 @@ def clean_data(df: pd.DataFrame) -> pd.DataFrame:
     return df_cleaned
 
 
-# =============================================================================
-# CHAPTER 3: VISUALIZE DISTRIBUTIONS
-# =============================================================================
+
 
 FIG_META = {
     "Fertility"       : ("Fig. 5",  "steelblue",    "Distribution of Fertility across Municipalities"),
@@ -214,9 +187,6 @@ def visualize_distributions(df_cleaned: pd.DataFrame) -> None:
         print(f"  Description: {DESCRIPTIONS[col]}")
 
 
-# =============================================================================
-# CHAPTER 4: NORMALIZE THE DATA
-# =============================================================================
 
 def normalize_minmax(df_cleaned: pd.DataFrame) -> pd.DataFrame:
     """Apply Min-Max normalization to all numeric columns (Fig. 11)."""
@@ -235,9 +205,6 @@ def normalize_minmax(df_cleaned: pd.DataFrame) -> pd.DataFrame:
     return df_norm
 
 
-# =============================================================================
-# CHAPTER 5: RELATIONSHIPS WITH FERTILITY RATE
-# =============================================================================
 
 SCATTER_META = {
     "Agriculture"     : ("Fig. 12", "darkorange",   "Fertility vs Agriculture"),
@@ -291,9 +258,6 @@ def explore_relationships(df_cleaned: pd.DataFrame) -> None:
         print(f"    Saved  : {fname}")
 
 
-# =============================================================================
-# MAIN
-# =============================================================================
 
 def main():
     # Chapter 1
