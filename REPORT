@@ -1,0 +1,188 @@
+Introduction
+Statistics plays a crucial role in analyzing and interpreting data, especially in the context of socioeconomic studies. It provides the tools necessary to summarize large datasets, identify patterns, and make informed decisions. Within the field of statistics, two primary approaches are descriptive and inferential statistics, each serving distinct purposes in the data analysis process.
+Descriptive statistics involve summarizing and organizing data to present it in a meaningful way (World Bank, 2023). This includes measures such as mean, median, mode, and standard deviation, as well as visual representations like charts and graphs. By providing a clear overview of data, descriptive statistics help in understanding the underlying characteristics and trends.
+Inferential statistics, on the other hand, go beyond the immediate data. They use a sample to make predictions, draw conclusions, and test hypotheses about a larger population. Techniques such as regression analysis, hypothesis testing, and confidence intervals are central to this approach, enabling researchers to generalize findings with a degree of certainty.
+The application of these statistical approaches is particularly significant in socioeconomic studies. They help in analyzing income disparities, employment trends, education levels, and health outcomes, among other factors, enabling policymakers to make evidence-based decisions. This essay explores the definitions of descriptive and inferential statistics, their roles in socioeconomic analysis, and their practical applications.
+
+Chapter 1: Description of the Dataset
+The dataset used in this analysis focuses on the effect of socioeconomic indicators — including agricultural involvement, education attainment, examination performance, and Catholic beliefs — on fertility and infant mortality rates across Swiss/French regions. The aim is to gain insight into how these socioeconomic data points affect mortality within a population (OECD, 2023).
+Dataset: Swiss_data_set.csv
+Entries: 47 rows (one per municipality/region)
+Variables: 7 columns
+ColumnDescriptionTypeUnnamed: 0Region/municipality nameCategoricalFertilityFertility rateNumerical, continuousAgriculture% of males involved in agricultureNumerical, continuousExamination% of draftees with highest army exam markNumerical, discreteEducation% of draftees with highest education levelNumerical, discreteCatholic% of the population that is CatholicNumerical, continuousInfant.MortalityInfant mortality rate per 1,000 live birthsNumerical, continuous
+
+Fig. 1: Visual representation of all the data
+
+
+Chapter 2: Data Cleaning Insights
+Missing Data
+No missing values are present in the dataset.
+Outlier Detection
+Potential outliers were identified in variables like Examination and Education, given their high standard deviations relative to the mean and large ranges.
+The cleaning process focused on outlier detection using the Inter-Quartile Range (IQR) method.
+Outlier Analysis Results
+VariableOutliers FoundFertility2 outliers identifiedAgricultureNo outliers foundExaminationNo outliers foundEducation5 outliers identifiedCatholicNo outliers foundInfant Mortality1 outlier identified
+
+Fig. 2: The outliers that have been removed
+
+Cleaning Approach
+Outliers in Fertility, Education, and Infant Mortality were removed from the dataset. The cleaned dataset (df_cleaned) is used for all subsequent analysis.
+Key Statistics (Cleaned Dataset)
+Descriptive statistics computed for each variable include:
+
+Mean
+Median
+Mode
+Range
+Variance
+Standard Deviation
+
+
+Fig. 3: Mean, median, mode, range, variance, and standard deviation for each variable column
+Fig. 4: Visual representation of the cleaned dataset (df_cleaned)
+
+
+Chapter 3: Visualization of Distribution of Variables
+Fertility
+
+Fig. 5: Distribution of Fertility across various municipalities
+
+
+Shape: Slightly right-skewed
+Central Tendency: Highest frequency around 70
+Spread: Approximately 55–95
+Interpretation: Most regions have high fertility rates, with a few regions showing significantly higher values.
+
+Agriculture
+
+Fig. 6: Distribution of Agriculture across various municipalities
+
+
+Shape: Close to normal, slightly right-skewed
+Central Tendency: Peak around 60%
+Spread: Approximately 10–90%
+Interpretation: Most regions have a moderate agricultural workforce; very few regions have extremely low or high agricultural involvement.
+
+Examination
+
+Fig. 7: Distribution of Examination across various municipalities
+
+
+Shape: Right-skewed
+Central Tendency: Most values between 10–15
+Spread: Approximately 5–30
+Interpretation: Most regions have relatively low examination scores; a few outliers show much higher performance.
+
+Education
+
+Fig. 8: Distribution of Education across various municipalities
+
+
+Shape: Right-skewed
+Central Tendency: Highest density below 10
+Spread: Approximately 2–17
+Interpretation: Most regions have lower education levels; only a few have significantly higher levels.
+
+Catholic
+
+Fig. 9: Distribution of Catholics across various municipalities
+
+
+Shape: Bimodal (two distinct peaks)
+Central Tendency: Two clusters — near 0–20% and near 80–100%
+Spread: Full range 0–100%
+Interpretation: The dataset reflects a clear religious divide — regions are either predominantly Catholic or predominantly non-Catholic, with few in between.
+
+Infant Mortality
+
+Fig. 10: Distribution of Infant Mortality across various municipalities
+
+
+Shape: Close to normal, slightly right-skewed
+Central Tendency: Peak around 20
+Spread: Approximately 15–27
+Interpretation: Infant mortality is fairly consistent across regions, centered around 20 per 1,000 live births.
+
+Overall Observations
+
+Right-Skewness in Most Variables: Fertility, Examination, Education, and Agriculture all show right-skewed distributions.
+Bimodal Distribution in Catholic Population: Indicates clear regional differences in religious composition.
+Education–Examination Correlation: Both distributions are similarly skewed — lower education likely correlates with lower examination performance.
+Infant Mortality is Approximately Normal: More uniform distribution compared to other variables.
+
+
+Chapter 4: Normalizing the Data
+Normalization is a preprocessing technique used to bring features with different units or ranges to a comparable scale. This is essential before applying machine learning algorithms or comparative statistical analysis.
+Method used: Min-Max Normalization
+The formula scales each value to a [0, 1] range:
+X_norm = (X - X_min) / (X_max - X_min)
+Min-Max normalization was applied to all numeric columns in df_cleaned. The resulting normalized DataFrame preserves the distribution shape while ensuring all features are on the same scale.
+
+Fig. 11: Normalized dataset (first 20 rows)
+
+
+Chapter 5: Exploring the Relationship of Socioeconomic Indicators with Fertility Rate
+Scatter plots with regression (trend) lines are used to explore the relationship between each socioeconomic indicator and the fertility rate.
+Fertility Rates and Agriculture Levels
+
+Fig. 12: Fertility vs Agriculture
+
+Relationship: Positive correlation — fertility rates are historically higher in agricultural societies due to the economic benefits of larger families.
+Historical Context:
+In traditional agricultural societies like rural France in the 19th and early 20th centuries, families had more children to provide labor for farming. In contrast, Swiss regions that industrialized earlier saw smaller family sizes as urban jobs required fewer workers and higher living costs reduced the economic incentive for large families.
+Modern Context: In rural areas with a stronger agricultural base, fertility rates may still be slightly higher, though mechanization has reduced reliance on manual labor.
+
+Fertility Rates and Education Attainment
+
+Fig. 13: Fertility vs Education
+
+Relationship: Negative correlation — higher education levels, particularly among women, are associated with lower fertility rates.
+Historical Context:
+In France, highly educated regions like Île-de-France historically reported lower fertility compared to less urbanized areas. Similarly, in Switzerland, rising education in the 20th century was accompanied by declining fertility rates as women entered the workforce (UNESCO, 2023).
+
+Fertility Rates and Examination Levels
+
+Fig. 14: Fertility vs Examination
+
+Relationship: Negative correlation — examination-driven education systems emphasize career development over family formation.
+Historical Context:
+In Switzerland, rigorous vocational and academic pathways encourage students to focus on career development, delaying family formation. France's centralized system (the baccalauréat) similarly incentivizes extended education.
+
+Fertility Rates and Catholic Beliefs
+
+Fig. 15: Fertility vs Catholics
+
+Relationship: Positive correlation — Catholicism traditionally encourages larger families and opposes contraception.
+Historical Context:
+In France, historically Catholic regions like Alsace and Lorraine have exhibited higher fertility compared to secular regions like Paris. In Switzerland, Catholic-majority cantons (e.g., Valais) had higher fertility than Protestant-majority ones (e.g., Zurich).
+Modern Context: The influence of Catholicism on fertility has diminished due to secularization and the widespread acceptance of contraception.
+
+Fertility Rates and Infant Mortality Rates
+
+Fig. 16: Fertility vs Infant Mortality
+
+Relationship: Positive correlation — as infant mortality decreases, families tend to have fewer children.
+Historical Context:
+In 19th-century France and Switzerland, high infant mortality led to larger families as insurance against child loss. As healthcare improved in the 20th century, fertility rates declined. Switzerland's advanced healthcare is reflected in one of the world's lowest infant mortality rates and correspondingly low fertility.
+
+Correlation Summary
+Socioeconomic IndicatorCorrelation with FertilityAgriculturePositiveEducationNegativeExaminationNegativeCatholicPositiveInfant MortalityPositive
+
+Conclusion
+This assignment demonstrated how descriptive and inferential statistics are essential tools for examining socioeconomic data to support informed decision-making. By analysing the Swiss dataset — covering 47 municipalities across French and Swiss regions — we identified key relationships between fertility rates and socioeconomic factors.
+Key findings:
+
+Higher education levels and lower infant mortality rates are associated with lower fertility rates.
+Higher agricultural involvement and greater Catholic population share are associated with higher fertility rates.
+
+Descriptive statistics provided a clear picture of data distributions and central tendencies, while inferential methods (regression analysis) enabled exploration of relationships between variables.
+These findings highlight the value of evidence-based policymaking for tackling demographic challenges (Pew Research Center, 2023). By leveraging statistical tools, policymakers can better understand population trends and implement targeted interventions to support sustainable development.
+
+Bibliography
+
+World Bank Data on Fertility Rates — https://data.worldbank.org/indicator/SP.DYN.TFRT.IN
+UNESCO Education Statistics — https://uis.unesco.org/
+CIA World Factbook — Infant Mortality Rates — https://www.cia.gov/the-world-factbook/
+Pew Research Center — Religion and Fertility — https://www.pewresearch.org/
+OECD Data on Agriculture and Socioeconomic Indicators — https://data.oecd.org/
+
